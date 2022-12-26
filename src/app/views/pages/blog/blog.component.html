@@ -1,0 +1,64 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">General pages</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Blogs</h6>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12 grid-margin" *ngFor="let postData of postsData">
+            <div class="card rounded">
+              <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center">
+                    <div class="ml-2">
+                      <h4>{{postData.title}}</h4>
+                      <p class="tx-11 text-muted" ng-if="postData.user_id == userData.id">Post by</p>
+                    </div>
+                  </div>
+                  <div ngbDropdown>
+                    <button class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2" ngbDropdownToggle>
+                      <i class="icon-lg pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                      <a ngbDropdownItem class="d-flex align-items-center" href="#"><i data-feather="meh" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Unfollow</span></a>
+                      <a ngbDropdownItem class="d-flex align-items-center" href="#"><i data-feather="corner-right-up" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Go to post</span></a>
+                      <a ngbDropdownItem class="d-flex align-items-center" href="#"><i data-feather="share-2" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Share</span></a>
+                      <a ngbDropdownItem class="d-flex align-items-center" href="#"><i data-feather="copy" appFeatherIcon class="icon-sm mr-2"></i> <span class="">Copy link</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="mb-3 tx-14">{{postData.body}}</p>
+              </div>
+              <div class="card-footer">
+                <div class="d-flex post-actions">
+                  <a href="javascript:;" class="d-flex align-items-center text-muted mr-4">
+                    <i class="icon-md" data-feather="heart" appFeatherIcon></i>
+                    <p class="d-none d-md-block ml-2">Like</p>
+                  </a>
+                  <a href="javascript:;" class="d-flex align-items-center text-muted mr-4">
+                    <i class="icon-md" data-feather="message-square" appFeatherIcon></i>
+                    <p class="d-none d-md-block ml-2">Comment</p>
+                  </a>
+                  <a href="javascript:;" class="d-flex align-items-center text-muted">
+                    <i class="icon-md" data-feather="share" appFeatherIcon></i>
+                    <p class="d-none d-md-block ml-2">Share</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

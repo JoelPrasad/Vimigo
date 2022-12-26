@@ -1,0 +1,94 @@
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink=".">Tables</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Hoverable Table <button type="button" class="btn btn-success float-right" (click)="openModal(addUserModal)">New User</button></h6>
+        <p class="card-description">Add class <code>.table-hover</code></p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let userData of usersData; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{userData.name}}</td>
+                <td>{{userData.email}}</td>
+                <td>{{userData.gender}}</td>
+                <td>{{userData.status}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary">Edit</button>
+                  <button type="button" class="btn btn-danger" (click)="onDeleteUser(userData.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--Start Add User Modal -->
+          <ng-template #addUserModal let-modal>
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" (click)="modal.close('by: close icon')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #addUser="ngForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="form-group">
+                  <label for="exampleInputUsername1">Name</label>
+                  <input type="text" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control" id="exampleInputUsername1" name="name" autocomplete="off" placeholder="name" [(ngModel)]="userModel.name">
+                  <p [class.d-none]="name.valid || name.untouched" class="text-danger mt-1">Name is required<p>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" required #email="ngModel" email [class.is-invalid]="email.invalid" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email" [(ngModel)]="userModel.email">
+                  <p [class.d-none]="email.valid || email.untouched" class="text-danger mt-1">Email is required</p>
+                </div>
+                <div class="form-group">
+                  <select class="custom-select" required #gender="ngModel" gender [class.is-invalid]="gender.invalid && gender.touched" name="gender" [(ngModel)]="userModel.gender">
+                    <option selected value="default"> Select Your Gender</option>
+                    <option *ngFor="let gender of genders">{{gender}}</option>
+                  </select>
+                  <p [class.d-none]="gender.valid || gender.untouched" class="text-danger mt-1">Gender is required</p>
+                </div>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" [(ngModel)]="userModel.status" name="status" id="optionsRadios5" value="active" checked="">
+                      <i class="input-frame"></i>
+                      active
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" [(ngModel)]="userModel.status" name="status" id="optionsRadios6" value="inactive">
+                      <i class="input-frame"></i>
+                      Inactive
+                    </label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Close</button>
+                  <button type="submit" class="btn btn-primary" (click)="modal.close('by: save button')">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+          <!-- End Add User Modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
